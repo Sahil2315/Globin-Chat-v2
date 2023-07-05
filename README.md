@@ -1,5 +1,5 @@
 # Globin-Chat
-## First Version
+## Second Version
 ### Added Group Chats
 ### Tech-Stack - NodeJS, socket.io, HTML, CSS, JavaScript, PostgreSQL
 
