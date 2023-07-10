@@ -317,20 +317,6 @@ body{
     background: linear-gradient(90deg, rgba(61, 41, 116, 0.2) 0%, rgba(40, 61, 104, 0.2) 74%, rgba(51, 57, 128, 0.2) 100%);
 }
 
-#meteors{
-    position: absolute;
-    top: 1%;
-    right: 15%;
-    z-index: 3;
-    opacity: 40%;
-}
-#diamond{
-    position: absolute;
-    bottom: 2%;
-    left: 0;
-    z-index: 3;
-    opacity: 40%;
-}
 #messager{
     position: absolute;
     top: 5px;
