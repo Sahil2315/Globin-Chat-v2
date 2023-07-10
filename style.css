@@ -148,7 +148,31 @@ body{
     flex-direction: row;
 }
 
-.chatsdiv{
+#chat-type-selecter{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 65px;
+    color: white;
+    z-index: 7;
+    margin-bottom: 10px;
+}
+#dmselect, #grpselect{
+    width: 50%;
+    height: 100%;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px;
+}
+#dmselect{
+    border-bottom: 4px solid #fff;
+}
+
+.chatsdiv, .divgroups{
     position: relative;
     background-color: rgba(100, 100, 230, 0.1);
     z-index: 4;
@@ -160,10 +184,10 @@ body{
     display: flex;
     flex-direction: row;
 }
-.chatsdiv:hover{
+.chatsdiv:hover, .divgroups:hover{
     background-color: rgba(90, 90, 90, 0.24);
 }
-.chatname{
+.chatname, .groupchatname{
     margin-left: 20px;
     padding-top: 10px;
 }
@@ -224,6 +248,32 @@ body{
 .online-no{
     border-left: 4px solid grey;
     box-shadow: 4px 5px 10px grey;
+}
+#grpmsgtext{
+    border: 1px solid white;
+    border-radius: 3px;
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    width: calc(98% - 395px);
+    margin-left: 2%;
+}
+#grpsender{
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    border: none;
+    cursor:pointer;
+    outline-style: none;
+    box-shadow: 0 4px rgba(255, 255, 255, 0.5);
+}#grpsender:hover{
+    background-color: rgba(119, 0, 255, 0.301);
+}
+#grpsender:active{
+    background-color: rgba(119, 0, 255, 0.301);
+    box-shadow: 0 0px rgba(255, 255, 255, 0.5);
+    transform: translateY(4px);
 }
 
 #msgtext{
@@ -314,15 +364,19 @@ body{
     margin: 10px 40px;
 }
 
-#chats{
+#chats, #groups{
     margin-bottom: 75px;
+}
+#groups{
+    display: none;
 }
 #chatshead{
     position: relative; 
     z-index: 3; 
     font-size: 28px; 
     font-weight: 600; 
-    color: white; padding: 40px ;
+    color: white; 
+    padding: 20px 50px;
 }
 
 
@@ -367,6 +421,7 @@ body{
     width: 100%;
     height: 100%;
     z-index: 1;
+    backdrop-filter: blur(20px);
     background: radial-gradient(circle at 50% 50%,rgba(58, 97, 252, 0.3), rgba(0, 0, 0, 0.68), rgba(0,0,0,1), rgba(0, 0, 0, 1));
 }
 
@@ -545,11 +600,12 @@ body{
     width: 350px;
     z-index: 6;
     backdrop-filter: blur(20px);
+    background: rgba(20, 0, 50, 0.2);
 }
 
 #info2{
     padding: 20px 10px;
-    background: linear-gradient(125deg, rgba(2,0,36,0.4) 0%, rgba(8, 8, 59, 0.4) 35%, rgba(0, 89, 255, 0.4) 100%);
+    /* background: linear-gradient(125deg, rgba(2,0,36,0.4) 0%, rgba(8, 8, 59, 0.4) 35%, rgba(0, 89, 255, 0.4) 100%); */
 }
 
 #infodiv{
@@ -607,7 +663,7 @@ body{
         font-size: 25px;
         padding: 20px 40px;
     }
-    #chats{
+    #chats, #groups{
         margin-bottom: 65px;
     }
     #chatsouter, #info1{
@@ -660,7 +716,7 @@ body{
         font-size: 25px;
         padding: 20px 40px;
     }
-    #chats{
+    #chats, #groups{
         margin-bottom: 65px;
     }
     #chatsouter, #info1{

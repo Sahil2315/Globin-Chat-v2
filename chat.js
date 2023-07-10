@@ -152,6 +152,8 @@ let info1 = document.getElementById('info1')
 let info2 = document.getElementById('info2')
 let info3 = document.getElementById('info3')
 
+let groupsdiv = document.getElementById('groups')
+
 window.addEventListener('load', async () => {
     let chats = await fetch('/getprev', {
         'method': 'GET',
@@ -262,9 +264,33 @@ window.addEventListener('load', async () => {
             }
         })
     }
+    let groupchats = await fetch('/getGroups', {
+        'method': 'GET', 
+        'headers': {
+            'Content-Type': 'application/json'
+        }
+    })
+    let gcjs = await groupchats.json()
+    let roomarr = []
+    for(let i=0; i < gcjs.result.length; i++){
+        let grpdiv = document.createElement('div')
+        grpdiv.innerHTML = `
+            <div class = "divgroups" onclick = "groupselecter([${gcjs.result[i].grpid}, '${gcjs.result[i].grpname}', '${gcjs.result[i].roomid}'])">
+                <div class = "imageAndStatus">
+                    <div class="userpic">
+                        <img class = "smolimg" src="${gcjs.result[i].grplogo}"/>
+                    </div>
+                </div>
+                <div class = "groupchatname">${gcjs.result[i].grpname}</div>
+            </div>
+        `
+        groupsdiv.appendChild(grpdiv)
+        roomarr.push(gcjs.result[i].roomid)
+    }
+    socket.emit("join-rooms-multiple", roomarr)
 })
 
-const socket = io.connect('https://globin-chat.onrender.com', { transports : ['websocket'] });
+const socket = io()
 socket.on('hands', (first) => {
     socket.emit('user', user)
 })
@@ -378,6 +404,9 @@ let msgarea1 = document.getElementById('msgarea1')
 
 
 let divselecter = async (centity) => {
+    grpmsgtext.style.display = 'none'
+    grpsender.style.display = 'none'
+    currentchatgroup = null
     let media2 = window.matchMedia('(min-width: 1100px)')
     const media3 = window.matchMedia('(min-width: 900px)')
     if(media2.matches){
@@ -411,7 +440,7 @@ let divselecter = async (centity) => {
                 notifier.parentNode.removeChild(notifier)
             }
             divarr[i].parentElement.style.background = "rgba(0, 0, 0, 0.24)"
-            info2.innerHTML = `
+            chatinfo.innerHTML = `
                 <div id= 'imagediv2'>
                     <img class = "profilePicture" src="${centity[2]}"/>
                 </div>

@@ -7,7 +7,8 @@
     <link rel="shortcut icon" href="Group 1.png" type="image/x-icon">
     <title>Globin Chat</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://globin-chat.onrender.com/socket.io/socket.io.js"></script>
+    <script src="https://kit.fontawesome.com/510c7dd143.js" crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
     <div id="graddiv">
@@ -58,6 +59,12 @@
             </div>           
         </div>
         <div>
+            <input type="text" id="grpmsgtext" placeholder="Enter Your Message here">
+            <button id="grpsender">
+                <svg width="20" height="20" viewBox="0 0 52 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.35052 2.89788L46.3268 28.0425L2 54" stroke="white" stroke-width="5"/>
+                </svg>                    
+            </button>
             <input type="text" id="msgtext" placeholder="Enter Your Message here">
             <button id="sender">
                 <svg width="20" height="20" viewBox="0 0 52 57" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,7 +82,18 @@
         <div id="chatshead">
             Your Chats:
         </div>
+        <div id="chat-type-selecter">
+            <div id="dmselect">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div id="grpselect">
+                <i class="fa-solid fa-users"></i>
+            </div>
+        </div>
         <div id="chats">
+        </div>
+        <div id="groups">
+            
         </div>
     </div>
     <div id="info-div">
@@ -102,4 +120,5 @@
     </div>
 </body>
 <script src="chat.js"></script>
+<script src="groups.js"></script>
 </html>

@@ -78,6 +78,14 @@ io.on("connection", (socket) => {
       if (err) throw err
     })
   })
+  socket.on("join-rooms-multiple", (roomarr) => {
+    socket.join(roomarr)
+    console.log(roomarr)
+    console.log("All Rooms Joined")
+  })
+  socket.on("newgrpmsg", (info) => {
+    socket.to(info.roomid).emit("recgrpmsg", info.msgcont)
+  })
   socket.on('disconnect', () => {
     socket.broadcast.emit("userdis", sockettoid[socket.id].name)
     OnlineUsers.delete((sockettoid[socket.id]).userid)
@@ -203,6 +211,24 @@ app.get('/getprev', (req, res) => {
         })
       })
     }
+  })
+})
+
+app.get('/getGroups', (req, res) => {
+  db.query(`select * from groups natural join grpmembers where uid = ${req.cookies.id.uid};`, (err, result) => {
+    if (err) throw err
+    res.send({'result': result.rows})
+  })
+})
+
+app.post('/getGroupMessages', (req, res) => {
+  db.query(`select uid, cont, timing, uname from grpmessages natural join login where grpid = ${req.body.grpid}`, (err, result) => {
+    if(err) throw err
+    db.query(`select uid, uname, profilePic, grprole from grpmembers natural join login where grpid = ${req.body.grpid};`, (er, rslt) => {
+      if (er) throw er
+      res.send({'messages': result.rows, 'members': rslt.rows})
+    })
+    
   })
 })
 
