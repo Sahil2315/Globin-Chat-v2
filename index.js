@@ -84,7 +84,8 @@ io.on("connection", (socket) => {
     console.log("All Rooms Joined")
   })
   socket.on("newgrpmsg", (info) => {
-    socket.to(info.roomid).emit("recgrpmsg", info.msgcont)
+    
+    socket.to(info.roomid).emit("recgrpmsg", info)
   })
   socket.on('disconnect', () => {
     socket.broadcast.emit("userdis", sockettoid[socket.id].name)

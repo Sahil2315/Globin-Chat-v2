@@ -174,7 +174,7 @@ body{
 
 .chatsdiv, .divgroups{
     position: relative;
-    background-color: rgba(100, 100, 230, 0.1);
+    background-color: rgba(46, 46, 116, 0.1);
     z-index: 4;
     width: 310px;
     padding: 15px 10px 15px 30px;
@@ -314,7 +314,7 @@ body{
     height: calc(100% - 68px);
     width: 350px;
     backdrop-filter: blur(20px);
-    background: linear-gradient(90deg, rgba(17, 10, 37, 0.2) 0%, rgba(20, 30, 34, 0.2) 74%, rgba(10, 14, 59, 0.2) 100%);
+    background: linear-gradient(90deg, rgba(61, 41, 116, 0.2) 0%, rgba(40, 61, 104, 0.2) 74%, rgba(51, 57, 128, 0.2) 100%);
 }
 
 #meteors{
