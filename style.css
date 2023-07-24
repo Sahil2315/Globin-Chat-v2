@@ -90,7 +90,7 @@ body{
     position: relative;
     margin-left: 15%;
     width: 83%;
-    background-color: rgba(0, 0, 255, 0.5);
+    background: linear-gradient(115deg, rgba(0, 0, 255, 0.5) 0%, rgba(85, 0, 170, 0.3) 100%);
     border-radius: 4px;
     padding: 8px;
     color: white;
@@ -104,7 +104,7 @@ body{
     position: relative;
     width: 83%;
     margin-right: 15%;
-    background-color: rgba(128, 128, 128, 0.7);
+    background: linear-gradient(100deg, rgba(90, 105, 105, 0.5) 0%, rgba(50, 130, 130, 0.3));
     border-radius: 4px;
     padding: 8px;
     color: white;
@@ -502,14 +502,37 @@ body{
     height: 100%;
     display: none;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
+.grpmembers{
+    display: flex;
+    flex-direction: row;
+    padding: 10px 20px;
+    width: calc(100% - 40px);
+    border-bottom: 1px solid rgba(0, 0, 255, 0.2);
+    background-color: rgba(137, 43, 226, 0.14);
+}
+.nameAndStatus{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 12px;
+}
+.membername{
+    color: white;
+    font-size: 14px;
+}
+.memberstatus{
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+}
+
+
 .profileInfo{
-    color: rgb(53 160 255);
+    color: rgb(150, 206, 255);
     font-size: 18px;
-    padding-left: 30px;
+    margin-left: 30px;
 }
 
 #imagediv{
@@ -525,6 +548,8 @@ body{
     height: 140px;
     width: 140px;
     margin-bottom: 25px;
+    margin-left: 40px;
+    margin-top: 80px;
 }
 
 #profilePicture1, .profilePicture{
@@ -536,6 +561,12 @@ body{
     width: 100%;
     border-radius: 100px;
     box-shadow: 2px 2px 20px rgba(0, 255, 136, 0.8);
+}
+
+.profilePicture-G{
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
 }
 
 #changePhoto2{
@@ -564,14 +595,15 @@ body{
 
 .change-about{
     background-color: rgba(0, 0, 0, 0);
-    color: turquoise;
     border: none;
+    font-size: 14px;
     width: 85%;
     cursor: pointer;
+    color: turquoise;
 }
 
 .change-about::placeholder{
-    color: turquoise;
+    color: rgba(64, 224, 208, 0.5);
     opacity: 1;
 }
 

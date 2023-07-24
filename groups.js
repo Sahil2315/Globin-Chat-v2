@@ -70,7 +70,13 @@ let groupselecter = (grpchat) => {
         chatinfo.style.width = '270px'
         msgarea1.style.width = 'calc(98% - 270px)'
         for(let i= 0; i<msgjson.members.length; i++){
-            chatinfo.innerHTML += `<div style="color:white">${msgjson.members[i].uname} | ${msgjson.members[i].uid}</div>`
+            chatinfo.innerHTML += `<div class="grpmembers">
+                <img src="${msgjson.members[i].profilepic}" class = "profilePicture-G" />
+                <div class="nameAndStatus">
+                <span class="membername">${msgjson.members[i].uname}</span>
+                <span class="memberstatus">${msgjson.members[i].aboutme}</span>
+                </div>
+            </div>`
         }
     })
     let divarr = document.querySelectorAll('.groupchatname')
@@ -83,6 +89,9 @@ let groupselecter = (grpchat) => {
     }
     let divarr1 = document.querySelectorAll('.chatname')
     for(let i=0; i<divarr1.length; i++){
+        if(divarr1[i].textContent == user.name){
+            return
+        }
         divarr1[i].parentElement.style.background = 'rgba(0,0,0,0)'
     }   
 }
@@ -97,7 +106,7 @@ grpsender.addEventListener('click', () => {
 })
 
 const SendGroupMessage = () => {
-    if(grpmsgtext.value.replace(" ", '') != '' && grpmsgtext.value.replace(" ", '') != '' && currentchatgroup != null){
+    if(grpmsgtext.value.replace(" ", '') != '' && grpmsgtext.value.replace("  ", '') != '' && currentchatgroup != null){
         socket.emit('newgrpmsg', {
             'msgcont': grpmsgtext.value,
             'roomid': currentchatgroup[2]

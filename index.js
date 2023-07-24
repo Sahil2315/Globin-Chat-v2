@@ -225,7 +225,7 @@ app.get('/getGroups', (req, res) => {
 app.post('/getGroupMessages', (req, res) => {
   db.query(`select uid, cont, timing, uname from grpmessages natural join login where grpid = ${req.body.grpid}`, (err, result) => {
     if(err) throw err
-    db.query(`select uid, uname, profilePic, grprole from grpmembers natural join login where grpid = ${req.body.grpid};`, (er, rslt) => {
+    db.query(`select uid, uname, profilePic, aboutme, grprole from grpmembers natural join login where grpid = ${req.body.grpid};`, (er, rslt) => {
       if (er) throw er
       res.send({'messages': result.rows, 'members': rslt.rows})
     })

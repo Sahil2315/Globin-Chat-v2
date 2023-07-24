@@ -27,7 +27,7 @@ msgr.addEventListener('keyup', async () => {
                     rslt.innerHTML = 
                     `   <div style ="background-color: rgba(0,0,0,0.5)">
                             <span>Name: ${mjs.value[i].uname}</span>
-                            <span>#${1000 + mjs.value[i].uid}</span>
+                            <span>#${mjs.value[i].uid}</span>
                         </div>
                         <hr>
                     `
@@ -35,7 +35,7 @@ msgr.addEventListener('keyup', async () => {
                     rslt.innerHTML = 
                     `   <div onclick = "selecterFunction([${mjs.value[i].uid}, '${mjs.value[i].uname}', '${picornot(mjs.value[i].profilepic)}', '${mjs.value[i].aboutme}', ${mjs.useronline}])">
                             <span>Name: ${mjs.value[i].uname}</span>
-                            <span>#${1000 + mjs.value[i].uid}</span>
+                            <span>#${mjs.value[i].uid}</span>
                         </div>
                         <hr>
                     `
@@ -220,7 +220,7 @@ window.addEventListener('load', async () => {
             ${profilejs.profile.uname}  
             </div>
             <div>
-            #${1000 + profilejs.profile.uid}
+            #${profilejs.profile.uid}
             </div>
             <div id="about-div1" class="about-div">${aboutfn(profilejs.profile.aboutme)}</div>
             <input type="text" placeholder="Edit Status" id="ch-about1" class="change-about">
@@ -449,7 +449,7 @@ let divselecter = async (centity) => {
                     ${centity[1]}  
                     </div>
                     <div>
-                    #${1000 + centity[0]}
+                    #${centity[0]}
                     </div>
                     <div id="about-div1" class="about-div">${aboutfn(centity[3])}</div>
                 </div>
