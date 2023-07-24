@@ -507,6 +507,10 @@ let divselecter = async (centity) => {
         }
     }
     msgarea.scrollTop = 10000
+    let divarr1 = document.querySelectorAll('.groupchatname')
+    for(let i=0; i<divarr1.length; i++){
+        divarr1[i].parentElement.style.background = 'rgba(0,0,0,0)'
+    }
 }
 
 sender.addEventListener('click', () => {
@@ -521,8 +525,16 @@ sender.addEventListener('click', () => {
         `)
         msgtext.value = ''
         msgarea.scrollTop = 10000
-
-        let divarr = document.getElementById('')
+        
+        let divarr = document.getElementsByClassName('chatname')
+        let htmlcurr
+        for (let i=0; i< divarr.length; i++){
+            if (divarr[i].textContent == currentchat[1]){
+                htmlcurr = divarr[i].parentElement
+                divarr[i].parentElement.remove()
+            }
+        }
+        chatsdiv.insertAdjacentElement('afterbegin', htmlcurr)
     }
 })
 
@@ -585,19 +597,30 @@ if(mediaQuery.matches){
 }
 
 window.addEventListener('resize', () => {
-    if(currentchat || currentchatgroup){
+    if(currentchat){
         if (window.innerWidth < 900){
             chatinfo.style.display = 'none'
-            msgarea1.style.width = '98%'   
-        }
-        else if(window.innerWidth > 900 && window.innerWidth < 1100){
-            chatinfo.style.display = 'flex'
-            chatinfo.style.width = '170px'
-            msgarea1.style.width = 'calc(98% - 170px)'
+            msgarea1.style.width = '98%'
+            msgtext.style.width = 'calc(98% - 75px)'
         }
         else{
+            chatinfo.style.display = 'flex'
             chatinfo.style.width = '220px'
             msgarea1.style.width = 'calc(98% - 220px)'
+            msgtext.style.width = 'calc(98% - 295px)'
+        }
+    }
+    else if(currentchatgroup){
+        if (window.innerWidth < 900){
+            chatinfo.style.display = 'none'
+            msgarea1.style.width = '98%'
+            grpmsgtext.style.width = 'calc(98% - 75px)'
+        }
+        else{
+            chatinfo.style.display = 'flex'
+            chatinfo.style.width = '270px'
+            msgarea1.style.width = 'calc(98% - 270px)'
+            grpmsgtext.style.width = 'calc(98% - 345px)'
         }
     }
 })

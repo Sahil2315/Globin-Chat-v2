@@ -60,9 +60,9 @@ body{
 
 #msg{
     position: absolute;
-    width: calc(100% - 350px);
-    height: calc(100% - 68px);
-    left: 350px;
+    width: calc(100% - 300px);
+    height: calc(100% - 53px);
+    left: 300px;
     display: flex;
     flex-direction: column;
     z-index: 2;
@@ -97,6 +97,7 @@ body{
     margin-top: 10px;
     z-index: 4;
     backdrop-filter: blur(5px);
+    font-size: 14px;
 }
 .receivedmsg{
     z-index: 4;
@@ -112,12 +113,7 @@ body{
     flex-direction: column;
     margin-left: 2.4%;
     backdrop-filter: blur(5px);
-}
-.msgheader{
-    font-size: 15px;
-    margin-bottom: 8px;
-    border-bottom: #fff solid 1px;
-    width:40%;
+    font-size: 14px;
 }
 
 #headline{
@@ -127,21 +123,21 @@ body{
     background: linear-gradient(180deg, rgba(28,13,103,0.5) 0%, rgba(48,52,120,0.5) 46%, rgba(95, 114, 184, 0.3) 85%, rgba(126,207,185,0.3) 97%, rgba(150,255,205,0.2) 100%);
 }
 #logo{
-    font-size: 34px;
+    font-size: 24px;
     color: white;
     text-shadow: 1px 1px 3px white;
     padding: 10px;
 }
 
 #selfinfodiv{
-    background-color: rgba(28, 96, 141, 0.44);
+    background-color: rgba(45, 96, 131, 0.2);
     position: relative;
     bottom: 0;
     left: 0;
     z-index: 6;
-    width: 310px;
-    padding: 15px 10px 15px 30px;
-    font-size: 18px;
+    width: 267px;
+    padding: 8px 8px 8px 25px;
+    font-size: 14px;
     color: white;
     cursor: pointer;
     display: flex;
@@ -161,7 +157,7 @@ body{
 #dmselect, #grpselect{
     width: 50%;
     height: 100%;
-    font-size: 30px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -176,9 +172,9 @@ body{
     position: relative;
     background-color: rgba(46, 46, 116, 0.1);
     z-index: 4;
-    width: 310px;
-    padding: 15px 10px 15px 30px;
-    font-size: 18px;
+    width: 265px;
+    padding: 8px 8px 8px 25px;
+    font-size: 14px;
     color: white;
     cursor: pointer;
     display: flex;
@@ -236,7 +232,7 @@ body{
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 350px;
+    width: 300px;
     backdrop-filter: blur(10px);
     z-index: 8;
 }
@@ -256,7 +252,7 @@ body{
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 10px;
-    width: calc(98% - 395px);
+    width: calc(98% - 345px);
     margin-left: 2%;
 }
 #grpsender{
@@ -311,8 +307,8 @@ body{
     padding: 0px;
     position: absolute;
     left: 0;
-    height: calc(100% - 68px);
-    width: 350px;
+    height: calc(100% - 55px);
+    width: 300px;
     backdrop-filter: blur(20px);
     background: linear-gradient(90deg, rgba(61, 41, 116, 0.2) 0%, rgba(40, 61, 104, 0.2) 74%, rgba(51, 57, 128, 0.2) 100%);
 }
@@ -359,10 +355,10 @@ body{
 #chatshead{
     position: relative; 
     z-index: 3; 
-    font-size: 28px; 
+    font-size: 20px; 
     font-weight: 600; 
     color: white; 
-    padding: 20px 50px;
+    padding: 14px 50px;
 }
 
 
@@ -502,7 +498,7 @@ body{
     right: 0;
     top: 0;
     width: 0px;
-    background: linear-gradient(115deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 25%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 217, 255, 0.356) 100%);
+    background: linear-gradient(115deg, rgba(75, 34, 129, 0.14) 0%, rgba(82, 57, 219, 0.14) 25%, rgba(0, 217, 255, 0.14) 100%);
     height: 100%;
     display: none;
     flex-direction: column;
@@ -518,20 +514,20 @@ body{
 
 #imagediv{
     position: relative;
-    height: 200px;
-    width: 200px;
+    height: 140px;
+    width: 140px;
     margin-bottom: 25px;
     border-radius: 100px;
-    margin-left: 30px;
+    margin-left: 60px;
 }
 #imagediv2{
     position: relative;
-    height: 200px;
-    width: 200px;
+    height: 140px;
+    width: 140px;
     margin-bottom: 25px;
 }
 
-#profilePicture1, .profilePicture, #profilePicture2{
+#profilePicture1, .profilePicture{
     position: absolute;
     left: 0;
     top: 0;
@@ -581,12 +577,12 @@ body{
 
 #info1{
     position: absolute;
-    bottom: 80px;
-    padding: 20px 0;
-    width: 350px;
+    bottom: 65px;
+    padding: 20px 20px;
+    width: 260px;
     z-index: 6;
     backdrop-filter: blur(20px);
-    background: rgba(20, 0, 50, 0.2);
+    background: rgba(127, 86, 189, 0.1);
 }
 
 #info2{
@@ -639,131 +635,7 @@ body{
 }
 
 
-/* responsiveness */
-
-@media screen and (max-width: 1100px){
-    #info1{
-        bottom: 68px;
-    }
-    #chatshead{
-        font-size: 25px;
-        padding: 20px 40px;
-    }
-    #chats, #groups{
-        margin-bottom: 65px;
-    }
-    #chatsouter, #info1{
-        width: 300px;
-    }
-    .chatsdiv, #selfinfodiv, #info3{
-        width: 275px;
-    }
-    .chatsdiv, #selfinfodiv{
-        font-size: 15px;
-        padding: 12px 10px 12px 15px;
-    }
-    .imageAndStatus{
-        width: 40px;
-        height: 44px;
-    }
-    #msg{
-        left: 300px;
-        width: calc(100% - 300px);
-    }
-    #messager{
-        width: 80%;
-    }
-    #srchresult span{
-        margin: 10px;
-    }
-    #imagediv2{
-        width: 150px;
-        height: 150px;
-    }
-    #chatinfo{
-        width: 170px;
-    }
-    #messager{
-        width: 60%;
-    }
-    #msgarea1{
-        width:calc(98% - 170px)
-    }
-    #msgtext{
-        width:calc(98% - 244px)
-    }
-}
-
-@media screen and (max-height: 850px){
-    #info1{
-        bottom: 68px;
-    }
-    #chatshead{
-        font-size: 25px;
-        padding: 20px 40px;
-    }
-    #chats, #groups{
-        margin-bottom: 65px;
-    }
-    #chatsouter, #info1{
-        width: 300px;
-    }
-    .chatsdiv, #selfinfodiv, #info3{
-        width: 275px;
-    }
-    .chatsdiv, #selfinfodiv{
-        font-size: 15px;
-        padding: 12px 10px 12px 15px;
-    }
-    .imageAndStatus{
-        width: 40px;
-        height: 44px;
-    }
-    #msg{
-        left: 300px;
-        width: calc(100% - 300px);
-    }
-    #messager{
-        width: 80%;
-    }
-    #srchresult span{
-        margin: 10px;
-    }
-    #imagediv, #imagediv2{
-        width: 150px;
-        height: 150px;
-    }
-    #chatinfo{
-        width: 170px;
-    }
-    #messager{
-        width: 60%;
-    }
-    #msgarea1{
-        width:calc(98% - 170px)
-    }
-    #msgtext{
-        width:calc(98% - 244px)
-    }
-    #imagediv2{
-        margin-top: 20px;
-    }
-}
-
-@media screen and (max-width: 900px){
-    #chatinfo{
-        display: none;
-    }
-    #messager{
-        width: 60%;
-    }
-    #msgarea1{
-        width: 98%;
-    }
-    #msgtext{
-        width: calc(98% - 75px);
-    }
-} 
+/* responsiveness */ 
 
 @media screen and (max-width: 650px) {
     body, html{

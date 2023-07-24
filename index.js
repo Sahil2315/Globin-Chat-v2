@@ -260,7 +260,6 @@ app.post('/whichchat', (req, res) => {
     (sendname = '${req.cookies.id.uname}' and recname = '${req.body.entity}') or 
     (recname = '${req.cookies.id.uname}' and sendname = '${req.body.entity}')
     order by msgid desc
-    limit 20
   `, (err, result) => {
     if (err) throw err
     res.send({ "messages": result.rows })

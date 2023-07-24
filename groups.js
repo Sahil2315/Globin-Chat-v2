@@ -34,6 +34,18 @@ let groupselecter = (grpchat) => {
     sender.style.display = 'none'
     grpmsgtext.style.display = ''
     grpsender.style.display = ''
+    currentchat = null
+    let media2 = window.matchMedia('(min-width: 900px)')
+    if(media2.matches){
+        chatinfo.style.display = 'flex'
+        chatinfo.style.width = '270px'
+        msgarea1.style.width = 'calc(98% - 270px)'
+    }
+    if(mediaQuery.matches){
+        chatsouter.style.transform = 'translateX(-300px)'
+        infodiv.style.display = 'none'
+        opened = false
+    }
     if( currentchatgroup != null && currentchatgroup[0] == grpchat[0]){
         return
     }
@@ -55,8 +67,8 @@ let groupselecter = (grpchat) => {
         }
         chatinfo.innerHTML = ``
         chatinfo.style.display = 'flex'
-        chatinfo.style.width = '320px'
-        msgarea1.style.width = 'calc(98% - 220px)'
+        chatinfo.style.width = '270px'
+        msgarea1.style.width = 'calc(98% - 270px)'
         for(let i= 0; i<msgjson.members.length; i++){
             chatinfo.innerHTML += `<div style="color:white">${msgjson.members[i].uname} | ${msgjson.members[i].uid}</div>`
         }
@@ -68,6 +80,10 @@ let groupselecter = (grpchat) => {
             continue
         }
         divarr[i].parentElement.style.background = 'rgba(0,0,0,0)'
+    }
+    let divarr1 = document.querySelectorAll('.chatname')
+    for(let i=0; i<divarr1.length; i++){
+        divarr1[i].parentElement.style.background = 'rgba(0,0,0,0)'
     }   
 }
 
