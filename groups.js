@@ -29,6 +29,15 @@ let grpsender = document.getElementById('grpsender')
 grpmsgtext.style.display = 'none'
 grpsender.style.display = 'none'
 
+let nullOrNot = (string) => {
+    if(string == null || string == "null"){
+        return ''
+    }
+    else{
+        return string
+    }
+}
+
 let groupselecter = (grpchat) => {
     msgtext.style.display = 'none'
     sender.style.display = 'none'
@@ -74,7 +83,7 @@ let groupselecter = (grpchat) => {
                 <img src="${msgjson.members[i].profilepic}" class = "profilePicture-G" />
                 <div class="nameAndStatus">
                 <span class="membername">${msgjson.members[i].uname}</span>
-                <span class="memberstatus">${msgjson.members[i].aboutme}</span>
+                <span class="memberstatus">${nullOrNot(msgjson.members[i].aboutme)}</span>
                 </div>
             </div>`
         }
