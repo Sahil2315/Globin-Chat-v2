@@ -86,6 +86,13 @@ body{
     left: 0;
 }
 
+.msgtiming{
+    position: absolute;
+    right: 5px;
+    font-size: 11px;
+    color: rgba(137, 218, 255, 0.5);
+}
+
 .sentmsg{
     position: relative;
     margin-left: 15%;
@@ -114,6 +121,47 @@ body{
     margin-left: 2.4%;
     backdrop-filter: blur(5px);
     font-size: 14px;
+}
+.receivedmsg-g{
+    z-index: 4;
+    position: relative;
+    width: 83%;
+    margin-right: 15%;
+    background: linear-gradient(100deg, rgba(90, 105, 105, 0.5) 0%, rgba(50, 130, 130, 0.3));
+    border-radius: 4px;
+    padding: 8px;
+    color: white;
+    margin-top: 2px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2.4%;
+    backdrop-filter: blur(5px);
+    font-size: 14px;
+}
+.msgcont{
+    margin-right: 40px;
+}
+.grpnamepic{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.75);
+    align-items: center;
+    margin-top: 10px;
+}
+.daychange{
+    font-size: 13px;
+    position: relative;
+    z-index: 8;
+    align-content: center;
+    margin: 15px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.grpnamepic span{
+    margin: 10px;
+    z-index: 8;
 }
 
 #headline{
@@ -569,7 +617,11 @@ body{
     width: 40px;
     border-radius: 20px;
 }
-
+.profilePicture-G2{
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+}
 #changePhoto2{
     position: absolute;
     left: 0;

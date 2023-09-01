@@ -2,7 +2,7 @@ let express = require('express')
 let app = express()
 let path = require('path')
 require('dotenv').config();
-const { Pool, Client } = require('pg')
+const { Pool, Client, types } = require('pg')
 const connectionString = process.env.Postgres_Con_String
 const cookieParser = require('cookie-parser')
 const server = require("http").Server(app);
@@ -11,6 +11,8 @@ const db = new Client({
   connectionString: connectionString,
   ssl: { rejectUnauthorized: false }
 })
+
+types.setTypeParser(1114, str => str)
 
 app.use(express.json())
 app.use(express.static(path.join(__dirname)))

@@ -38,6 +38,10 @@ let nullOrNot = (string) => {
     }
 }
 
+let idtoimg = {}
+let lastmsger = null
+let lastmsgdate = null
+
 let groupselecter = (grpchat) => {
     msgtext.style.display = 'none'
     sender.style.display = 'none'
@@ -61,6 +65,9 @@ let groupselecter = (grpchat) => {
     currentchat = null
     currentchatgroup = grpchat
     msgarea.innerHTML = ''
+    lastmsger = null
+    lastmsgdate = null
+
     fetch('/getGroupMessages', {
         'method': 'POST',
         'headers': {
@@ -71,9 +78,6 @@ let groupselecter = (grpchat) => {
         })
     }).then(messages => messages.json())
     .then(msgjson => {
-        for(let i= 0; i<msgjson.messages.length; i++){
-            msgarea.innerHTML += `<div style="color:white">${msgjson.messages[i].uname} : ${msgjson.messages[i].cont} | ${msgjson.messages[i].timing}</div>`
-        }
         chatinfo.innerHTML = ``
         chatinfo.style.display = 'flex'
         chatinfo.style.width = '270px'
@@ -86,6 +90,30 @@ let groupselecter = (grpchat) => {
                 <span class="memberstatus">${nullOrNot(msgjson.members[i].aboutme)}</span>
                 </div>
             </div>`
+            idtoimg[msgjson.members[i].uid] = msgjson.members[i].profilepic
+        }
+        for(let i= 0; i<msgjson.messages.length; i++){
+            timedate = new Date(msgjson.messages[i].timing)
+            if(timedate - lastmsgdate < 24*3600*1000 && timedate.getDate() == lastmsgdate.getDate()){
+                if( lastmsger && lastmsger == msgjson.messages[i].uid){
+                    lastmsgdate = timedate
+                    msgarea.innerHTML += `<div class ="receivedmsg-g"><div class="msgcont">${msgjson.messages[i].cont} </div><span class="msgtiming"><span>${lastmsgdate.getHours()}:${lastmsgdate.getMinutes()}</span></div>`
+                }
+                else{
+                    lastmsgdate = timedate
+                    msgarea.innerHTML += `<div class ="grpnamepic"><img class="profilePicture-G2" src="${idtoimg[msgjson.messages[i].uid]}"/><span>${msgjson.messages[i].uname}</span></div>
+                    <div class ="receivedmsg-g"><div class="msgcont">${msgjson.messages[i].cont}</div> <span class="msgtiming"><span>${lastmsgdate.getHours()}:${lastmsgdate.getMinutes()}</span></div>`
+                    lastmsger = msgjson.messages[i].uid
+                }
+            }
+            else{
+                lastmsgdate = timedate
+                msgarea.innerHTML += `<div class="daychange">${lastmsgdate.getFullYear()}/${lastmsgdate.getMonth() + 1}/${lastmsgdate.getDate()}</div>`
+                msgarea.innerHTML += `<div class ="grpnamepic"><img class="profilePicture-G2" src="${idtoimg[msgjson.messages[i].uid]}"/><span>${msgjson.messages[i].uname}</span></div>
+                <div class ="receivedmsg-g"><div class="msgcont">${msgjson.messages[i].cont}</div> <span class="msgtiming"><span>${lastmsgdate.getHours()}:${lastmsgdate.getMinutes()}</span></div>`
+                lastmsger = msgjson.messages[i].uid
+            }
+            
         }
     })
     let divarr = document.querySelectorAll('.groupchatname')
