@@ -84,7 +84,7 @@ let groupselecter = (grpchat) => {
         msgarea1.style.width = 'calc(98% - 270px)'
         for(let i= 0; i<msgjson.members.length; i++){
             chatinfo.innerHTML += `<div class="grpmembers">
-                <img src="${msgjson.members[i].profilepic}" class = "profilePicture-G" />
+                <img src="${picornot(msgjson.members[i].profilepic)}" class = "profilePicture-G" />
                 <div class="nameAndStatus">
                 <span class="membername">${msgjson.members[i].uname}</span>
                 <span class="memberstatus">${nullOrNot(msgjson.members[i].aboutme)}</span>
@@ -94,24 +94,50 @@ let groupselecter = (grpchat) => {
         }
         for(let i= 0; i<msgjson.messages.length; i++){
             timedate = new Date(msgjson.messages[i].timing)
-            if(timedate - lastmsgdate < 24*3600*1000 && timedate.getDate() == lastmsgdate.getDate()){
-                if( lastmsger && lastmsger == msgjson.messages[i].uid){
-                    lastmsgdate = timedate
-                    msgarea.innerHTML += `<div class ="receivedmsg-g"><div class="msgcont">${msgjson.messages[i].cont} </div><span class="msgtiming"><span>${lastmsgdate.getHours()}:${lastmsgdate.getMinutes()}</span></div>`
+            let showdate = `${timedate.getFullYear()}/${timedate.getMonth() + 1}/${timedate.getDate()}`;
+            let today = new Date()
+            if(timedate - today < 24*3600*1000 && timedate.getDate() == today.getDate()){
+                showdate = 'Today'
+            }
+            if(msgjson.messages[i].uid == user.userid){
+                if(timedate - lastmsgdate < 24*3600*1000 && timedate.getDate() == lastmsgdate.getDate()){
+                    if( lastmsger && lastmsger == msgjson.messages[i].uid){
+                        lastmsgdate = timedate
+                        msgarea.innerHTML += `<div class ="sentmsg-g"><div class="msgcont">${msgjson.messages[i].cont} </div><span class="msgtiming"><span>${lastmsgdate.getHours()}:${lastmsgdate.getMinutes()}</span></div>`
+                    }
+                    else{
+                        lastmsgdate = timedate
+                        msgarea.innerHTML += `<div style="margin-top:10px;" class ="sentmsg-g"><div class="msgcont">${msgjson.messages[i].cont}</div> <span class="msgtiming"><span>${lastmsgdate.getHours()}:${lastmsgdate.getMinutes()}</span></div>`
+                        lastmsger = msgjson.messages[i].uid
+                    }
                 }
                 else{
                     lastmsgdate = timedate
-                    msgarea.innerHTML += `<div class ="grpnamepic"><img class="profilePicture-G2" src="${idtoimg[msgjson.messages[i].uid]}"/><span>${msgjson.messages[i].uname}</span></div>
-                    <div class ="receivedmsg-g"><div class="msgcont">${msgjson.messages[i].cont}</div> <span class="msgtiming"><span>${lastmsgdate.getHours()}:${lastmsgdate.getMinutes()}</span></div>`
+                    msgarea.innerHTML += `<div class="daychange">${showdate}</div>`
+                    msgarea.innerHTML += `<div class ="sentmsg-g"><div class="msgcont">${msgjson.messages[i].cont}</div> <span class="msgtiming"><span>${lastmsgdate.getHours()}:${lastmsgdate.getMinutes()}</span></div>`
                     lastmsger = msgjson.messages[i].uid
                 }
             }
             else{
-                lastmsgdate = timedate
-                msgarea.innerHTML += `<div class="daychange">${lastmsgdate.getFullYear()}/${lastmsgdate.getMonth() + 1}/${lastmsgdate.getDate()}</div>`
-                msgarea.innerHTML += `<div class ="grpnamepic"><img class="profilePicture-G2" src="${idtoimg[msgjson.messages[i].uid]}"/><span>${msgjson.messages[i].uname}</span></div>
-                <div class ="receivedmsg-g"><div class="msgcont">${msgjson.messages[i].cont}</div> <span class="msgtiming"><span>${lastmsgdate.getHours()}:${lastmsgdate.getMinutes()}</span></div>`
-                lastmsger = msgjson.messages[i].uid
+                if(timedate - lastmsgdate < 24*3600*1000 && timedate.getDate() == lastmsgdate.getDate()){
+                    if( lastmsger && lastmsger == msgjson.messages[i].uid){
+                        lastmsgdate = timedate
+                        msgarea.innerHTML += `<div class ="receivedmsg-g"><div class="msgcont">${msgjson.messages[i].cont} </div><span class="msgtiming"><span>${lastmsgdate.getHours()}:${lastmsgdate.getMinutes()}</span></div>`
+                    }
+                    else{
+                        lastmsgdate = timedate
+                        msgarea.innerHTML += `<div class ="grpnamepic"><img class="profilePicture-G2" src="${picornot(idtoimg[msgjson.messages[i].uid])}"/><span>${msgjson.messages[i].uname}</span></div>
+                        <div class ="receivedmsg-g"><div class="msgcont">${msgjson.messages[i].cont}</div> <span class="msgtiming"><span>${lastmsgdate.getHours()}:${lastmsgdate.getMinutes()}</span></div>`
+                        lastmsger = msgjson.messages[i].uid
+                    }
+                }
+                else{
+                    lastmsgdate = timedate
+                    msgarea.innerHTML += `<div class="daychange">${showdate}</div>`
+                    msgarea.innerHTML += `<div class ="grpnamepic"><img class="profilePicture-G2" src="${picornot(idtoimg[msgjson.messages[i].uid])}"/><span>${msgjson.messages[i].uname}</span></div>
+                    <div class ="receivedmsg-g"><div class="msgcont">${msgjson.messages[i].cont}</div> <span class="msgtiming"><span>${lastmsgdate.getHours()}:${lastmsgdate.getMinutes()}</span></div>`
+                    lastmsger = msgjson.messages[i].uid
+                }
             }
             
         }
