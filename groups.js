@@ -103,7 +103,7 @@ let groupselecter = (grpchat) => {
                 if(timedate - lastmsgdate < 24*3600*1000 && timedate.getDate() == lastmsgdate.getDate()){
                     if( lastmsger && lastmsger == msgjson.messages[i].uid){
                         lastmsgdate = timedate
-                        msgarea.innerHTML += `<div class ="sentmsg-g"><div class="msgcont">${msgjson.messages[i].cont} </div><span class="msgtiming"><span>${lastmsgdate.getHours()}:${lastmsgdate.getMinutes()}</span></div>`
+                        msgarea.innerHTML += `<div class ="sentmsg-g"><div class="msgcont">${msgjson.messages[i].cont} </div><span class="msgtiming">${lastmsgdate.getHours()}:${lastmsgdate.getMinutes()}</span></div>`
                     }
                     else{
                         lastmsgdate = timedate
@@ -141,6 +141,7 @@ let groupselecter = (grpchat) => {
             }
             
         }
+        msgarea.scrollTop = 10000
     })
     let divarr = document.querySelectorAll('.groupchatname')
     for(let i=0; i<divarr.length; i++){
@@ -156,7 +157,7 @@ let groupselecter = (grpchat) => {
             return
         }
         divarr1[i].parentElement.style.background = 'rgba(0,0,0,0)'
-    }   
+    }
 }
 
 grpmsgtext.addEventListener('keypress', (event) => {
@@ -172,15 +173,47 @@ const SendGroupMessage = () => {
     if(grpmsgtext.value.replace(" ", '') != '' && grpmsgtext.value.replace("  ", '') != '' && currentchatgroup != null){
         socket.emit('newgrpmsg', {
             'msgcont': grpmsgtext.value,
-            'roomid': currentchatgroup[2]
+            'roomid': currentchatgroup[2],
+            'grpid': currentchatgroup[0]
         })
         currDate = new Date()
-        msgarea.insertAdjacentHTML('beforeend', `
-        <div style="color:white">${grpmsgtext.value} | ${currDate.getHours()}:${currDate.getMinutes()}</div>
-        `)
+        
+        if (lastmsgdate == null || currDate - lastmsgdate > 24*3600*1000 || currDate.getDate() != lastmsgdate.getDate()){
+            msgarea.innerHTML += `<div class="daychange">Today</div>`
+        }
+        if(lastmsger == user.userid){
+            msgarea.insertAdjacentHTML('beforeend', `
+            <div class="sentmsg-g"><div class="msgcont">${grpmsgtext.value} </div> <span class="msgtiming">${currDate.getHours()}:${currDate.getMinutes()}</span></div>
+            `)
+        }
+        else{
+            msgarea.insertAdjacentHTML('beforeend', `
+            <div style="margin-top: 10px;" class="sentmsg-g"><div class="msgcont">${grpmsgtext.value} </div> <span class="msgtiming">${currDate.getHours()}:${currDate.getMinutes()}</span></div>
+            `)
+        }
+        lastmsger = user.userid
+        msgarea.scrollTop = 10000
+        grpmsgtext.value = ''
     }
 }
 
 socket.on('recgrpmsg', (cont) => {
-    console.log(cont)
+    currDate = new Date()
+    if (lastmsgdate == null || currDate - lastmsgdate > 24*3600*1000 || currDate.getDate() != lastmsgdate.getDate()){
+        msgarea.innerHTML += `<div class="daychange">Today</div>`
+    }
+    if(lastmsger == cont.sender.userid){
+        msgarea.insertAdjacentHTML('beforeend', `
+        <div class="receivedmsg-g"><div class="msgcont">${cont.msgcont} </div> <span class="msgtiming">${currDate.getHours()}:${currDate.getMinutes()}</span></div>
+        `)
+    }
+    else{
+        msgarea.insertAdjacentHTML('beforeend', `
+        <div class ="grpnamepic"><img class="profilePicture-G2" src="${picornot(idtoimg[cont.sender.userid])}"/><span>${cont.sender.name}</span></div>
+        <div class="receivedmsg-g"><div class="msgcont">${cont.msgcont} </div> <span class="msgtiming">${currDate.getHours()}:${currDate.getMinutes()}</span></div>
+        `)
+        lastmsger = cont.sender.userid
+    }
+    console.log(cont.msgcont)
+    msgarea.scrollTop = 10000
 })

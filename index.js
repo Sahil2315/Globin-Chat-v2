@@ -86,8 +86,10 @@ io.on("connection", (socket) => {
     console.log("All Rooms Joined")
   })
   socket.on("newgrpmsg", (info) => {
-    
-    socket.to(info.roomid).emit("recgrpmsg", info)
+    db.query(`insert into grpmessages(grpid, uid, cont, timing) values(${info.grpid}, ${sockettoid[socket.id].userid}, '${info.msgcont}', now())`, (err, result) => {
+      if(err) throw err
+      socket.to(info.roomid).emit("recgrpmsg", {'group': info.grpid, 'msgcont': info.msgcont, 'sender': sockettoid[socket.id]})
+    })
   })
   socket.on('disconnect', () => {
     socket.broadcast.emit("userdis", sockettoid[socket.id].name)

@@ -91,6 +91,7 @@ body{
     right: 5px;
     font-size: 11px;
     color: rgba(137, 218, 255, 0.5);
+    top: 4px;
 }
 
 .sentmsg{
@@ -101,7 +102,7 @@ body{
     border-radius: 4px;
     padding: 8px;
     color: white;
-    margin-top: 10px;
+    margin-top: 2px;
     z-index: 4;
     backdrop-filter: blur(5px);
     font-size: 14px;
@@ -130,7 +131,7 @@ body{
     border-radius: 4px;
     padding: 8px;
     color: white;
-    margin-top: 10px;
+    margin-top: 2px;
     display: flex;
     flex-direction: column;
     margin-left: 2.4%;

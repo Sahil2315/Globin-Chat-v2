@@ -491,20 +491,35 @@ let divselecter = async (centity) => {
           setTimeout(resolve, ms);
         });
     }
+    lastmsgdate = null
+    lastmsger = null
     let rcjs = await respchat.json().then(await sleep(500)).then(msgarea.innerHTML='')
     for(let i=rcjs.messages.length -1; i>= 0; i--){
+        let timedate = new Date(rcjs.messages[i].timing)
+        if(lastmsgdate == null || lastmsgdate - timedate >= 24*3600*1000 || lastmsgdate.getDate() != timedate.getDate()){
+            let today = new Date()
+            if(timedate.getDate() == today.getDate() && today - timedate < 24*3600*1000){
+                msgarea.innerHTML += `<div class="daychange">Today</div>`
+            }
+            else{
+                msgarea.innerHTML += `<div class="daychange">${timedate.getFullYear()}/${timedate.getMonth() + 1}/${timedate.getDate()}</div>`
+            }
+            lastmsgdate = timedate
+        }
+        if(lastmsger && lastmsger != rcjs.messages[i].sendid){
+            msgarea.innerHTML += `<div style="margin-top:10px;"></div>`
+        }
         if(rcjs.messages[i].sendid == user.userid){
             msgarea.insertAdjacentHTML('beforeend', `
-                <div class="sentmsg">${rcjs.messages[i].content}</div>
+                <div class="sentmsg"><div class="msgcont">${rcjs.messages[i].content}</div><div class="msgtiming">${timedate.getHours()}:${timedate.getMinutes()}</div></div>
             `)
         }
         else{
             msgarea.insertAdjacentHTML('beforeend', `
-                <div class="receivedmsg">
-                    ${rcjs.messages[i].content}
-                </div>
+                <div class="receivedmsg"><div class="msgcont">${rcjs.messages[i].content}</div><div class="msgtiming">${timedate.getHours()}:${timedate.getMinutes()}</div></div>
             `)
         }
+        lastmsger = rcjs.messages[i].sendid
     }
     msgarea.scrollTop = 10000
     let divarr1 = document.querySelectorAll('.groupchatname')
@@ -520,9 +535,19 @@ sender.addEventListener('click', () => {
             'msgto': currentchat[0],
             'toname': currentchat[1]
         })
+        let timedate = new Date()
+        if(lastmsgdate == null || lastmsgdate - timedate >= 24*3600*1000 || lastmsgdate.getDate() != timedate.getDate()){
+            msgarea.innerHTML += `<div class="daychange">Today</div>`
+            lastmsgdate = timedate
+        }
+        if(lastmsger && lastmsger != user.userid){
+            msgarea.innerHTML += `<div style="margin-top:10px;"></div>`
+        }
         msgarea.insertAdjacentHTML('beforeend', `
             <div class="sentmsg">${msgtext.value}</div>
         `)
+        lastmsger = user.userid
+        lastmsgdate = timedate
         msgtext.value = ''
         msgarea.scrollTop = 10000
         
@@ -546,9 +571,19 @@ msgtext.addEventListener('keypress', (event) => {
                 'msgto': currentchat[0],
                 'toname': currentchat[1]
             })
+            let timedate = new Date()
+            if(lastmsgdate == null || lastmsgdate - timedate >= 24*3600*1000 || lastmsgdate.getDate() != timedate.getDate()){
+                msgarea.innerHTML += `<div class="daychange">Today</div>`
+                lastmsgdate = timedate
+            }
+            if(lastmsger && lastmsger != user.userid){
+                msgarea.innerHTML += `<div style="margin-top:10px;"></div>`
+            }
             msgarea.insertAdjacentHTML('beforeend', `
                 <div class="sentmsg">${msgtext.value}</div>
             `)
+            lastmsger = user.userid
+            lastmsgdate = timedate
             msgtext.value = ''
             msgarea.scrollTop = 10000
             
