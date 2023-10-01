@@ -75,8 +75,8 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("usercon", userdet.name)
   })
   socket.on("newmsg", (msg) => {
-    io.to(idtosocket[`${msg.msgto}`]).emit("nmessage", {'fromname': `${sockettoid[socket.id].name}`, 'fromid': `${sockettoid[socket.id].userid}`, 'cont': msg.msgcont})
-    db.query(`insert into messages(sendid, sendname, recid, recname, content, timing) values('${sockettoid[socket.id].userid}' , '${sockettoid[socket.id].name}',  ${msg.msgto}, '${msg.toname}', '${msg.msgcont}', now());`, (err, res) => {
+    io.to(idtosocket[`${msg.msgto}`]).emit("nmessage", {'fromname': `${sockettoid[socket.id].name}`, 'fromid': sockettoid[socket.id].userid, 'cont': msg.msgcont})
+    db.query(`insert into messages(sendid, sendname, recid, recname, content, timing) values(${sockettoid[socket.id].userid} , '${sockettoid[socket.id].name}',  ${msg.msgto}, '${msg.toname}', '${msg.msgcont.replaceAll(`'`, `''`)}', now());`, (err, res) => {
       if (err) throw err
     })
   })
@@ -86,7 +86,7 @@ io.on("connection", (socket) => {
     console.log("All Rooms Joined")
   })
   socket.on("newgrpmsg", (info) => {
-    db.query(`insert into grpmessages(grpid, uid, cont, timing) values(${info.grpid}, ${sockettoid[socket.id].userid}, '${info.msgcont}', now())`, (err, result) => {
+    db.query(`insert into grpmessages(grpid, uid, cont, timing) values(${info.grpid}, ${sockettoid[socket.id].userid}, '${info.msgcont.replaceAll(`'`, `''`)}', now())`, (err, result) => {
       if(err) throw err
       socket.to(info.roomid).emit("recgrpmsg", {'group': info.grpid, 'msgcont': info.msgcont, 'sender': sockettoid[socket.id]})
     })

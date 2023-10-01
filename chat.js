@@ -296,10 +296,18 @@ socket.on('hands', (first) => {
 })
 socket.on('nmessage', (msg) => {
     if(currentchat != null && msg.fromname == currentchat[1]){
+        currDate = new Date()
+        if ( lastmsgdate == null || currDate - lastmsgdate > 24*3600*1000 || currDate.getDate() != lastmsgdate.getDate()){
+            msgarea.innerHTML += `<div class="daychange">Today</div>`
+        }
+        if(lastmsger == null || lastmsger != msg.fromid){
+            msgarea.innerHTML += `<div style="margin-top:10px;"></div>`
+        }
         msgarea.insertAdjacentHTML('beforeend', `
             <div class="receivedmsg">${msg.cont}</div>
         `)
         msgarea.scrollTop = 10000
+        lastmsger = msg.fromid
     }
     else{
         let divarr = document.getElementsByClassName('chatname')
