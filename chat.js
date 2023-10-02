@@ -415,6 +415,7 @@ let divselecter = async (centity) => {
     grpmsgtext.style.display = 'none'
     grpsender.style.display = 'none'
     currentchatgroup = null
+    chatinfo.style.background = "rgba(0,0,0,0)"
     let media2 = window.matchMedia('(min-width: 1100px)')
     const media3 = window.matchMedia('(min-width: 900px)')
     if(media2.matches){
@@ -450,9 +451,10 @@ let divselecter = async (centity) => {
             divarr[i].parentElement.style.background = "rgba(0, 0, 0, 0.24)"
             chatinfo.innerHTML = `
                 <div id= 'imagediv2'>
-                    <img class = "profilePicture" src="${centity[2]}"/>
+                    <img class = "profilePictureA" src="https://64.media.tumblr.com/627ed2149421f5bab72b482d95085536/tumblr_o0iceyt1te1tdhgrzo1_1280.jpg"/>
+                    <img class = "profilePictureB" src="${centity[2]}"/>
                 </div>
-                <div class = "profileInfo">
+                <div class = "profileInfo" style = "margin-top: 40px;">
                     <div>
                     ${centity[1]}  
                     </div>

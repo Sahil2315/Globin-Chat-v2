@@ -43,6 +43,7 @@ let lastmsger = null
 let lastmsgdate = null
 
 let groupselecter = (grpchat) => {
+    chatinfo.style.background = ""
     msgtext.style.display = 'none'
     sender.style.display = 'none'
     grpmsgtext.style.display = ''
@@ -192,6 +193,7 @@ const SendGroupMessage = () => {
             `)
         }
         lastmsger = user.userid
+        lastmsgdate = currDate
         msgarea.scrollTop = 10000
         grpmsgtext.value = ''
     }
@@ -212,8 +214,9 @@ socket.on('recgrpmsg', (cont) => {
         <div class ="grpnamepic"><img class="profilePicture-G2" src="${picornot(idtoimg[cont.sender.userid])}"/><span>${cont.sender.name}</span></div>
         <div class="receivedmsg-g"><div class="msgcont">${cont.msgcont} </div> <span class="msgtiming">${currDate.getHours()}:${currDate.getMinutes()}</span></div>
         `)
-        lastmsger = cont.sender.userid
     }
+    lastmsger = cont.sender.userid
+    lastmsgdate = currDate
     console.log(cont.msgcont)
     msgarea.scrollTop = 10000
 })

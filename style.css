@@ -617,6 +617,26 @@ body{
     margin-top: 80px;
 }
 
+.profilePictureA{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 2;
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+}
+.profilePictureB{
+    position: absolute;
+    left: 40px;
+    top: 40px;
+    z-index: 3;
+    height: 130px;
+    width: 130px;
+    border-radius: 100px;
+    box-shadow: 0px 0px 20px rgba(70, 131, 103, 0.85);
+}
+
 #profilePicture1, .profilePicture{
     position: absolute;
     left: 0;
