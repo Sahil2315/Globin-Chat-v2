@@ -44,14 +44,14 @@ body{
 .nav{
     position: absolute;
     right: 5%;
-    top: 20px;
+    top: 13px;
 }
 .navlink{
-    font-size: 20px;
+    font-size: 17px;
     text-decoration: none;
     color: white;
     background-color: rgba(113, 43, 204, 0.5);
-    padding: 8px 15px;
+    padding: 6px 12px;
     border-radius: 3px;
 }
 .navlink:hover{
@@ -628,7 +628,7 @@ body{
 }
 .profilePictureB{
     position: absolute;
-    left: 40px;
+    left: 0px;
     top: 40px;
     z-index: 3;
     height: 130px;

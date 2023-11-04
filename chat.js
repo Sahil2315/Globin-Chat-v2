@@ -451,7 +451,6 @@ let divselecter = async (centity) => {
             divarr[i].parentElement.style.background = "rgba(0, 0, 0, 0.24)"
             chatinfo.innerHTML = `
                 <div id= 'imagediv2'>
-                    <img class = "profilePictureA" src="https://64.media.tumblr.com/627ed2149421f5bab72b482d95085536/tumblr_o0iceyt1te1tdhgrzo1_1280.jpg"/>
                     <img class = "profilePictureB" src="${centity[2]}"/>
                 </div>
                 <div class = "profileInfo" style = "margin-top: 40px;">
